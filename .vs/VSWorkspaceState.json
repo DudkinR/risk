@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\Models",
+    "\\database",
+    "\\database\\migrations",
+    "\\lang",
+    "\\lang\\en",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\question",
+    "\\routes"
+  ],
+  "PreviewInSolutionExplorer": false
+}
