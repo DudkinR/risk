@@ -4,7 +4,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "start": "concurrently \"php artisan serve\" \"npm run dev\""
+        "start": "concurrently \"php artisan serve --port=8000\" \"npm run dev\"",
+        "start12": "concurrently \"php artisan serve --host=192.168.0.12 --port=8000\" \"npm run dev\""
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

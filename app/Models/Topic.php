@@ -24,4 +24,10 @@ class Topic extends Model
     {
         return $this->belongsToMany(Risk::class, 'topic_risk' , 'topic_id' ,'risk_id');
     }
+    // topic img     belongsTo many img
+    public function images()
+    {
+        return $this->belongsToMany(Img::class, 'topic_img' , 'topic_id' ,'img_id');
+    }
+
 }

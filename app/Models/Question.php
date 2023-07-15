@@ -27,4 +27,5 @@ public $table='questions';
         return $this->belongsToMany(Answer::class,'question_answer', 'question_id','answer_id');
     }
 
+
 }

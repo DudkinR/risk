@@ -37,6 +37,11 @@ class Project extends Model
                     ->withPivot('question_id', 'result')
                     ->withTimestamps();
     }
+public function actions()
+    {
+        return $this->belongsToMany(Action::class, 'action_project', 'project_id', 'action_id')
+                     ->withTimestamps();
+    }
 
 
 

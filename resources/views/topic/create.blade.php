@@ -29,6 +29,18 @@
                                 @endforeach
                             </select>
                         </div>
+                          <!-- select img-->
+                        <?php
+                        $imgs = App\Models\Img::all();
+                        ?>
+                        <div class="form-group">
+                            <label for="img">img</label> 
+                            <select name="img[]" id="img" class="form-control"  multiple>
+                                @foreach($imgs as $img)
+                                    <option value="{{ $img->id }}">{{ $img->alt }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Создать</button>
                         </div>

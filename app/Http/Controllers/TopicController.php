@@ -39,7 +39,8 @@ class TopicController extends Controller
         $topic->title = $request->title;
         $topic->anatation = $request->anatation;
         $topic->save();
-         $topic->risks()->attach($request->risks);
+        $topic->risks()->attach($request->risks);
+        $topic->images()->attach($request->img);
         return redirect()->route('topic.index');
     }
 
@@ -75,6 +76,8 @@ class TopicController extends Controller
         $topic->save();
         $topic->risks()->detach();
         $topic->risks()->attach($request->risks);
+        $topic->images()->detach();
+        $topic->images()->attach($request->img);
         return redirect()->route('topic.index',['#topic_'.$id]);
     }
 

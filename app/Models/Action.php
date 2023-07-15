@@ -17,6 +17,13 @@ class Action extends Model
         'status',
         'user_id'
     ];
+    // quesstions belongs to many actions
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class, 'action_question', 'action_id', 'question_id')
+                    ->withTimestamps();
+    }
+
 
 
 

@@ -8,3 +8,5 @@ Route::get('/question/edit/{id}', [App\Http\Controllers\QuestionController::clas
 Route::put('/question/update/{id}', [App\Http\Controllers\QuestionController::class, 'update'])->name('question.update');
 Route::delete('/question/destroy/{id}', [App\Http\Controllers\QuestionController::class, 'destroy'])->name('question.destroy');
 Route::post('/question/addanswers', [App\Http\Controllers\QuestionController::class, 'addanswers'])->name('question.addanswers');
+// route any similar
+Route::any('/question/similar', [App\Http\Controllers\QuestionController::class, 'similar'])->name('question.similar');

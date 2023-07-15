@@ -1,24 +1,28 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <h1> Выбор risks: </h1>
-         <h2> {{$project->title}} </h2>
+         <h2>{{$project->title}}</h2>
          <p>
             {{$project->anatation}}
-         </p>
+         </p>   <p>
+             {{__('Сделать сброс проекта')}}   {{$count[0]}} / {{$count[1]}} 
+             <a href="{{route('project.reset',$project->id)}}" class="btn btn-warning" >{{__('Сброс')}}</a>
+          </p>
     </div>
      <div class="row">
         <h1> Question: </h1>
-         <h2> {!!  $questions->first()->content !!} </h2> 
+         <h2>{!!$question->content!!}</h2>
+         <h2>{!!$question->id!!}</h2>
+        
     </div>
     <style>
-        .myAnsw  {
+        .myAnsw{
             margin-bottom: 10px;
             background-color: #e6e6e6;
         }
-        .myAnswV {
+        .myAnswV{
           background-color: #33C4FF;
           cursor: pointer;
         }
@@ -29,15 +33,16 @@
      <?php
         $mass_v=[];
      ?>
-     <h1> Answers: </h1>
+     <h1> Answers:</h1>
         @foreach($answers as $answer)
         <?php
           $v = $project->answers()->where('answer_id', $answer->id)->value('result');
-           $mass_v[] =['id' => $answer->id, 'v' => $v];
+          $mass_v[] =['id' => $answer->id, 'v' => $v];
         ?>
              <div class="row border">
                 <div class="col-sm-12 myAnsw ">
                  <h3>  {{$answer->content}}   </h3>
+                 
                 </div>
             </div>
             <div class="row  border">
@@ -46,7 +51,7 @@
                 @else style="background-color:#33C4FF"
                 @endif
                 id="myansw_{{$answer->id}}_2"  onclick="myAnswer({{$answer->id}},2);" >
-                   {{__('Существующий')}}
+                   {{__('Уже существует')}}
                 </div>
                 <div class="col-sm-4 myansw_{{$answer->id}}"
                 @if($v==1) style="background-color:#F0FF33"
@@ -60,16 +65,15 @@
                 @else style="background-color:#33C4FF"
                 @endif
                  id="myansw_{{$answer->id}}_0"   onclick="myAnswer({{$answer->id}},0);" >
-                   {{__('Нет')}}
+                   {{__('Нет необходимости')}}
                 </div>   
             </div>
          @endforeach
-        <form action="{{$questions->nextPageUrl()}}" method="POST">
+        <form action="{{route('project.reaction',$project->id)}}" method="POST">
        @csrf
-      
         <div class="row" > 
         <input type="hidden" name="answers" id="answers" value="{{json_encode($mass_v)}}">
-        <input type="hidden" name="question_id" id="question_id" value="{{$questions->first()->id}}" >
+        <input type="hidden" name="question_id" id="question_id" value="{{$question->id}}" >
           <textarea name="answer" id="answer" cols="30" rows="10"></textarea>
           <input  type="hidden" name="vl" id="vl" value="0" >   
        </div>
@@ -81,7 +85,7 @@
                 {{__('Желаемый')}}
             </div>
             <div class="col-sm-4 myvi" id="vi_0"   onclick="mynewAnswer(0);" >
-                {{__('Нет')}}
+                {{__('Отсутствует необходимость')}}
             </div>   
         </div>
        <div class="row">
@@ -90,9 +94,8 @@
     </form>
 </div>
 <script>
-    var answers= document.getElementById('answers');
-  var result = {!! json_encode($mass_v) !!};
-
+var answers= document.getElementById('answers');
+var result = {!! json_encode($mass_v) !!};
 function myAnswer(id, v) {
   // Поиск объекта с указанным id в массиве result
   var index = result.findIndex(x => x.id === id);

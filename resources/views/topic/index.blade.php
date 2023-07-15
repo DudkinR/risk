@@ -18,6 +18,9 @@
                 <a name="topic_{{$topic->id}}"></a>
                 <div class="card-header">{{$topic->title}}
                    {{$topic->risks->count()}}
+                    @foreach ($topic->images as $img)
+                       <img src="/{{$img->url}}" alt="{{$img->alt}}" width="100px">
+                    @endforeach
                 </div>
                 <div class="card-body">
                     <p>{{$topic->anatation}}</p>

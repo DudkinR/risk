@@ -24,5 +24,9 @@ class Answer extends Model
                     ->withPivot('question_id', 'result')
                     ->withTimestamps();
     }
+    public function actions()
+    {
+        return $this->belongsToMany(Action::class, 'action_answer', 'answer_id', 'action_id');
+    }
 
 }

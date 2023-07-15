@@ -23,9 +23,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // __dir project.php
 require __DIR__ .'/project.php';
 require __DIR__ .'/topic.php';
+require __DIR__ .'/anketa.php';
 require __DIR__ .'/risk.php';
 require __DIR__ .'/question.php';
 require __DIR__ .'/action.php';
-
-
 require __DIR__ .'/test.php';
+// resourse routes ImgController
+Route::resource('img',App\Http\Controllers\ImgController::class);

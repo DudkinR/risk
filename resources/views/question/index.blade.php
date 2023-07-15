@@ -22,9 +22,9 @@
             >
                 <div class="card-header">{{$question->title}}</div>
                 <div class="card-body">
-                    <p>{{$question->content}}</p>
+                    <p>Какие возможные ответы на вопрос: {{$question->content}}</p>
 
-                    count questions {{$question->answers()->count()}}
+                    count ответов {{$question->answers()->count()}}
                      <br>
                     <a href="{{route('question.show',$question->id)}}" class="btn btn-primary">Read more</a>
                      <!-- button edit-->

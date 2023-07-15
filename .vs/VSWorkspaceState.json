@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\app",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
     "\\app\\Models",
     "\\database",
-    "\\database\\migrations",
-    "\\lang",
-    "\\lang\\en",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\question",
+    "\\resources\\views\\anketa",
     "\\routes"
   ],
+  "SelectedNode": "\\app\\Http\\Controllers\\ActionController.php",
   "PreviewInSolutionExplorer": false
 }

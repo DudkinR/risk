@@ -8,13 +8,12 @@
             {{$project->anatation}}
          </p>
     </div>
-        <div class="row">
-            @foreach($project->questions as $question)
-            <div class="col-sm-12">
-                 <h3>  {{$question->content}}   </h3>
-             </div>
-            @endforeach
-        </div>
-
+    <div class="row">
+        @foreach($project->questions as $question)
+        <div class="col-sm-12">
+                <h3>{{$question->content}}</h3>
+            </div>
+        @endforeach
+    </div>
 </div>
 @endsection

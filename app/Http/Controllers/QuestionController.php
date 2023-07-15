@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use    App\Models\Question;
 use    App\Models\Answer;
+use    App\Models\Action;
+use    App\Models\Risk;
+use    App\Models\Project;
 use  Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
@@ -110,6 +113,8 @@ class QuestionController extends Controller
             foreach($answers as $a)
             {
              $a= trim($a) ;
+             // delete doble spaces
+            $a = preg_replace('/\s+/', ' ', $a);
             if($a != '' && Answer::where('content','=',$a)->count() == 0)
                 {
                     $answer = new Answer;
@@ -127,4 +132,66 @@ class QuestionController extends Controller
             }
         return redirect()->route('question.index',['#question'.$request->question_id]);
     }
+     public function similar(Request $request) {
+        if (isset($request->threshold)) {
+            $threshold = $request->threshold;
+        } else {
+            $threshold = 90; // Порог сходства в процентах
+        }
+        // заглушка если не указан проект то первый
+        if (isset($request->project_id)) {
+           $project =Project::find($request->project_id);
+        } else {
+            $project = Project::first();
+        }
+        // выбираем риски для проекта
+ 
+        $risks=$project->topics->first()->risks;
+        $qs=[];    // выбираем вопросы для проекта  risks   risk_question
+        foreach($risks as $risk)
+        {
+            $qs = array_merge($qs, $risk->questions->toArray());
+        }
+        $non_similar_questions = [];
+        while (!empty($qs)) {
+            $current_question = array_shift($qs); // Получаем первый вопрос из массива
+
+            // Проверяем, является ли текущий вопрос похожим на другие вопросы
+            $is_similar = false;
+            foreach ($qs as $q) {
+                $percent = 0;
+                similar_text($current_question['content'], $q['content'], $percent);
+
+                if ($percent >= $threshold) {
+                    $is_similar = true;
+                    break;
+                }
+            }
+
+            if (!$is_similar) {
+                $non_similar_questions[] = $current_question;
+            }
+        }
+      //  return   $non_similar_questions ;
+          return view('question.similar', compact('non_similar_questions', 'threshold'));
+    }
+   public function similars($question, $qs, $threshold, $mass_qs)
+    {
+        $questions = collect();
+
+        foreach ($qs as $q) {
+            similar_text($question['content'], $q['content'], $percent);
+
+            if ($percent >= $threshold && $q['id'] !== $question['id'] && !$mass_qs->contains('id', $q['id'])) {
+               
+                $mass_qs->push($q['id']);
+            }
+            else{
+               $questions->push($q['id']);
+            }
+        }
+
+        return [$questions, $mass_qs];
+    }
+
 }

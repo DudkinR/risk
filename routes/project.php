@@ -21,3 +21,5 @@ Route::any('/project/monitoring/{id}', [App\Http\Controllers\ProjectController::
 Route::any('/project/raport/{id}', [App\Http\Controllers\ProjectController::class, 'raport'])->name('project.raport');
 //Категоризация рисков: Риски могут быть категоризированы по их важности и приоритету. Это позволяет определить, какие риски требуют более пристального внимания и управления.
 Route::any('/project/cat/{id}', [App\Http\Controllers\ProjectController::class, 'cat'])->name('project.cat');
+Route::any('/project/reset/{id}', [App\Http\Controllers\ProjectController::class, 'reset'])->name('project.reset');
+Route::any('/project/similar/{id}', [App\Http\Controllers\ProjectController::class, 'show'])->name('project.similar');

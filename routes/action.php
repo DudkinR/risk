@@ -8,3 +8,7 @@ Route::get('/action/edit/{id}', [App\Http\Controllers\ActionController::class, '
 Route::put('/action/update/{id}', [App\Http\Controllers\ActionController::class, 'update'])->name('action.update');
 Route::delete('/action/destroy/{id}', [App\Http\Controllers\ActionController::class, 'destroy'])->name('action.destroy');
 Route::post('/action/addanswers', [App\Http\Controllers\ActionController::class, 'addanswers'])->name('action.addanswers');
+ //action.newaction
+Route::post('/action/newaction/{id}', [App\Http\Controllers\ActionController::class, 'newaction'])->name('action.newaction');
+// route any similar
+Route::any('/action/similar', [App\Http\Controllers\ActionController::class, 'similar'])->name('action.similar');

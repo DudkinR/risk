@@ -15,13 +15,26 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        <script src="/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="30" viewBox="0 0 100 30">
+                      <rect width="100%" height="100%" fill="#FFFFFF" />
+                      <text x="7" y="22" fill="#EBEDEF" font-size="18" font-weight="bold">{{ config('app.name', 'Laravel') }}</text>
+                      <text x="5" y="20" fill="#000060" font-size="18" font-weight="bold">{{ config('app.name', 'Laravel') }}</text>
+                      
+                      <line x1="50" y1="15" x2="100" y2="15" stroke="#000" stroke-width="2" />
+                      <line x1="50" y1="8" x2="100" y2="8" stroke="#000" stroke-width="2" />
+                      <line x1="50" y1="22" x2="100" y2="22" stroke="#000" stroke-width="2" />
+                      <line x1="50" y1="29" x2="100" y2="29" stroke="#000" stroke-width="2" />
+                    </svg>
+
+
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
